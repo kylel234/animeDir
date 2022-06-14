@@ -1,0 +1,24 @@
+{
+  "name": "animeapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "debug": "DEBUG=* nodemon app.js",
+    "start": "DEBUG=app,app:* nodemon app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "debug": "^4.3.4",
+    "dotenv": "^16.0.1",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "nodemon": "^2.0.16"
+  },
+  "nodemonConfig": {
+    "restartable": "rs",
+    "delay": 2500
+  }
+}
