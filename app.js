@@ -1,7 +1,6 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 3000;
 const path = require('path');
 const bodyParser = require('body-parser'); // body parser helps access input elements from server
 
@@ -26,6 +25,6 @@ const db = mongoose.connection;
 db.on('error', error => console.error(error));
 db.once('open', () => console.log('Connected to Mongoose'));
 
-app.listen(PORT, ()=> {
-    console.log("listening to port " + PORT)
+app.listen(process.env.PORT || 3000, ()=> {
+    console.log("listening to port 3000")
 });

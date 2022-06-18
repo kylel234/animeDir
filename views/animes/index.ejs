@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animes</title>
+</head>
+<body>
+    <h1>Search Animes</h1>
+    <form action="/animes" method="GET">
+        <label>Title</label>
+        <input type="text" name="title" value="<%= searchOptions.title%>">
+        <button type="submit">Search</button>
+    </form>
+    <br>
+        <label>Aired After</label>
+        <input type="date" name="airedAfter" value="<%= searchOptions.airedAfter %>">
+    <br>
+        <label>Aired Before</label>
+        <input type="date" name="airedBefore" value="<%= searchOptions.airedBefore %>">
+      </div>
+      <button type="submit">Search</button>
+    </form>
+    <br>
+    <% animes.forEach(anime => { %>
+        <img height="150" width="100" src="<%= anime.posterImagePath %>" >
+    <% }) %>
+</body>
+</html>

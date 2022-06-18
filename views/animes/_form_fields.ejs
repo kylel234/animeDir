@@ -1,0 +1,31 @@
+<label>Title</label>
+<input type="text" name="title" value="<%= anime.title %>">
+<div>
+    <label>Studio</label>
+    <select name="studio">
+    <% studios.forEach(studio => { %>
+      <% if (studio.id === anime.studio) { %>
+        <option selected label="<%= studio.name %>" value="<%= studio.id %>">
+      <% } else { %>
+        <option label="<%= studio.name %>" value="<%= studio.id %>">
+      <% } %>
+    <% }) %>
+    </select>
+</div>
+<div>
+  <label>Date Aired</label>
+  <input type="date" name="dateAired"
+        value="<%= anime.dateAired == null ? '' : anime.dateAired.toISOString().split('T')[0] %>">
+</div>
+<div>
+  <label>Episode Count</label>
+  <input type="number" name="episodeCount" min="1" value="<%= anime.episodeCount %>">
+</div>
+<div>
+  <label>Poster</label>
+  <input type="file" name="poster">
+</div>
+<div>
+  <label>Description</label>
+  <textarea name="description"><%= anime.description %></textarea>
+</div>
