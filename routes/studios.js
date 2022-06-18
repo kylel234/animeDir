@@ -21,12 +21,12 @@ router.get('/', async (req, res) => {
     }
   })
 
-// new route for anime
+// new route for studio
 router.get('/new', (req, res) => {
     res.render('studios/new', {studio: new Studio()});
 });
 
-// Create route for anime
+// Create route for studio
 router.post('/', async (req, res) => {
     const studio = new Studio({
         name: req.body.name // explicity tells server params we want for studio

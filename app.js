@@ -5,8 +5,9 @@ const PORT = process.env.PORT || 3000;
 const path = require('path');
 const bodyParser = require('body-parser'); // body parser helps access input elements from server
 
-const indexRouter = require('./routes/index');
+const indexRouter = require('./routes/index'); // gets route for index
 const studioRouter = require('./routes/studios');
+const animeRouter = require('./routes/animes');
 
 app.use(express.static(path.join(__dirname, '/public/'))); // loads files in public
 app.use(bodyParser.urlencoded({limit: '10mb', extended: false})) 
@@ -17,6 +18,7 @@ app.set('views', __dirname + '/views'); // middleware to access views
 
 app.use('/', indexRouter);
 app.use('/studios', studioRouter);
+app.use('/animes', animeRouter);
 
 const mongoose = require('mongoose');
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true });
