@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Book</title>
+</head>
+<body>
+    <h2><%= anime.title %></h2>
+    <img width="200" height="300" src="<%= anime.posterImagePath %>">
+    <div>Studio: <%= anime.studio.name %></div> 
+    <div>Airing Date: <%= anime.dateAired.toDateString() %></div>
+    <div>Episodes: <%= anime.episodeCount %></div>
+    <div>Description: <%= anime.description %></div>
+    <a href="/animes/<%= anime.id %>/edit">Edit</a>
+    <%- include('../partials/delete', { url: `/animes/${anime.id}` }) %>
+    <a href="/studios/<%= anime.studio.id %>">View Studio</a>
+</body>
+</html>

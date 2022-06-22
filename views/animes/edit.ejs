@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EditAnime</title>
+</head>
+<body>
+    <h2>Edit Anime</h2>
+<form action="/animes/<%= anime.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+  <%- include('_form_fields') %>
+  <a href="/animes">Cancel</a>
+  <button type="submit">Update</button>
+</form> 
+</body>
+</html>

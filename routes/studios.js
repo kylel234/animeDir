@@ -64,7 +64,7 @@ router.get('/:id/edit', async (req, res) => {
     const studio = await Studio.findById(req.params.id) // finds user by id
     res.render('studios/edit', {studio: studio}); 
   } catch {
-    res.redirect('/')
+    res.redirect('/studios')
   }
 })
 
@@ -94,7 +94,7 @@ router.delete('/:id', async (req, res) => {
 try {
     studio = await Studio.findById(req.params.id)
     await studio.remove() // removes current studio
-    res.redirect(`/studios`) // redirects to studios/studio id, studios showpage
+    res.redirect('/studios') // redirects to studios/studio id, studios showpage
 } catch {
     if (studio == null) {
       res.redirect('/') // check if no studio is find and if not redirect to home page

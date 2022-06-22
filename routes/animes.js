@@ -109,10 +109,6 @@ router.put('/:id', upload.single('poster'), async (req, res) => {
     anime.dateAired = new Date(req.body.dateAired)
     anime.episodeCount = req.body.episodeCount
     anime.description = req.body.description
-    // check poster of anime exists and not passed in so that a new poster can be saved
-    if (req.body.poster != null && req.body.poster !== " ") {
-      savePoster(anime, req.body.poster)
-    }
     await anime.save() // save this updated anime
     res.redirect(`/animes/${anime.id}`);
   } catch {
