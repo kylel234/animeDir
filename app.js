@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const bodyParser = require('body-parser'); // body parser helps access input elements from server
+const methodOverride = require('method-override') // will help app to route to and use the put or delete method 
 
 const indexRouter = require('./routes/index'); // gets route for index
 const studioRouter = require('./routes/studios');
@@ -14,7 +15,7 @@ app.use(bodyParser.urlencoded({limit: '10mb', extended: false}))
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views'); // middleware to access views
 
-
+app.use(methodOverride('_method'))
 app.use('/', indexRouter);
 app.use('/studios', studioRouter);
 app.use('/animes', animeRouter);

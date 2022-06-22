@@ -60,7 +60,7 @@ router.post('/', upload.single('poster'), async (req, res) => {
 
   try {
     const newAnime = await anime.save();
-    res.redirect(`animes`);
+    res.redirect(`animes/${newAnime.id}`);
   } catch {
     if (anime.animeImageName != null) {
       removeAnimePoster(anime.animeImageName);
@@ -77,7 +77,81 @@ function removeAnimePoster(filename) {
   });
 }
 
+// show page route
+router.get('/:id', async (req, res) => {
+  try {
+    const anime = await Anime.findById(req.params.id).populate('studio').exec() // populates anime object with info about the studio
+    res.render('animes/show', {anime: anime})
+  } catch {
+    res.redirect('/')
+  }
+})
+
+// edit anime route
+router.get('/:id/edit', async (req, res) => {
+  try {
+    const anime = await Anime.findById(req.params.id)
+    renderEditPage(res, anime);
+  } catch {
+    res.redirect('/')
+  }
+});
+
+// update anime route
+router.put('/:id', upload.single('poster'), async (req, res) => {
+  let anime
+
+  try {
+    anime = await Anime.findById(req.params.id)
+    // allows user to edit features of anime
+    anime.title = req.body.title
+    anime.studio = req.body.studio
+    anime.dateAired = new Date(req.body.dateAired)
+    anime.episodeCount = req.body.episodeCount
+    anime.description = req.body.description
+    // check poster of anime exists and not passed in so that a new poster can be saved
+    if (req.body.poster != null && req.body.poster !== " ") {
+      savePoster(anime, req.body.poster)
+    }
+    await anime.save() // save this updated anime
+    res.redirect(`/animes/${anime.id}`);
+  } catch {
+    if (anime != null) {
+      renderEditPage(res, anime, true) // renders edit page again with error message
+    } else {
+      res.redirect('/') // cant get anime, go to home page
+    }
+  }
+});
+
+// delete anime page route
+router.delete('/:id', async (req, res) => {
+  let anime
+  try {
+    anime = await Anime.findById(req.params.id)
+    await anime.remove()
+    res.redirect('/animes')
+  } catch {
+    if (anime != null) {
+      res.render('animes/show', {
+        anime: anime,
+        errorMessage: 'Could not remove'
+      })
+    } else {
+      res.redirect('/')
+    }
+  }
+})
+
 async function renderNewPage(res, anime, hasError = false) {
+  renderFormPage(res, anime, 'new', hasError)
+}
+
+async function renderEditPage(res, anime, hasError = false) {
+  renderFormPage(res, anime, 'edit', hasError)
+}
+
+async function renderFormPage(res, anime, form, hasError = false) {
   try {
     const studios = await Studio.find({});
     const params = {
@@ -85,9 +159,13 @@ async function renderNewPage(res, anime, hasError = false) {
       anime: anime
     }
     if (hasError) {
-      params.errorMessage = "Error creating anime";
+      if (form === 'edit') {
+        params.errorMessage = "Error editing anime"
+      } else {
+        params.errorMessage = "Error creating anime";
+      } 
     }
-    res.render('animes/new', params);
+    res.render(`animes/${form}`, params);
   } catch {
     res.redirect('/animes');
   }

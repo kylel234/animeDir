@@ -24,7 +24,9 @@
     </form>
     <br>
     <% animes.forEach(anime => { %>
-        <img height="150" width="100" src="<%= anime.posterImagePath %>" >
+        <a href="/animes/<%= anime.id %>">
+            <img height="150" width="100" src="<%= anime.posterImagePath %>" >
+        </a>
     <% }) %>
 </body>
 </html>
