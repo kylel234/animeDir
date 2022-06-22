@@ -12,8 +12,8 @@ const animeRouter = require('./routes/animes');
 app.use(express.static(path.join(__dirname, '/public/'))); // loads files in public
 app.use(bodyParser.urlencoded({limit: '10mb', extended: false})) 
 
-app.set('views', __dirname + '/views'); // middleware to access views
 app.set('view engine', 'ejs');
+app.set('views', __dirname + '/views'); // middleware to access views
 
 
 app.use(methodOverride('_method'))
