@@ -57,7 +57,7 @@ router.post('/', upload.single('poster'), async (req, res) => {
     animeImageName: fileName,
     description: req.body.description
   })
-
+    
   try {
     const newAnime = await anime.save();
     res.redirect(`animes/${newAnime.id}`);

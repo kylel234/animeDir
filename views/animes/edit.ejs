@@ -4,14 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/style.css">
     <title>EditAnime</title>
 </head>
 <body>
-    <h2>Edit Anime</h2>
+  <div class="container">
+    <%- include('../partials/header.ejs')%>
+</div>
+    <h2 class="header">Edit Anime</h2>
 <form action="/animes/<%= anime.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
   <%- include('_form_fields') %>
-  <a href="/animes">Cancel</a>
-  <button type="submit">Update</button>
+  <a class="buttons danger-button" href="/animes">Cancel</a>
+  <button class="buttons primary-button" type="submit">Update</button>
 </form> 
 </body>
 </html>

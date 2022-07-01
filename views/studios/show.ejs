@@ -4,11 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/style.css">
     <title>Show Studio</title>
 </head>
 <body>
+    <div class="container">
+        <%- include('../partials/header.ejs')%>
+    </div>
     <h2><%= studio.name %></h2>
-    <a href="/studios/<%= studio.id %>/edit">Edit</a>
+    <a class="buttons primary-button" href="/studios/<%= studio.id %>/edit">Edit</a>
     <%- include('../partials/delete', {url: `/studios/${studio.id}`}) %>
     <% if (animesByStudio.length > 0) { %>
         <h3><%= studio.name %> Anime</h3>

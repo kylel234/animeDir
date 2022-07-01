@@ -4,14 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/style.css">
     <title>Animes</title>
 </head>
 <body>
-    <h1>Search Animes</h1>
+    <div class="container">
+        <%- include('../partials/header.ejs')%>
+    </div>
+    <h1 class="header">Search Animes</h1>
     <form action="/animes" method="GET">
         <label>Title</label>
         <input type="text" name="title" value="<%= searchOptions.title%>">
-        <button type="submit">Search</button>
+        <button class="buttons primary-button" type="submit">Search</button>
     </form>
     <br>
         <label>Aired After</label>
@@ -20,10 +24,11 @@
         <label>Aired Before</label>
         <input type="date" name="airedBefore" value="<%= searchOptions.airedBefore %>">
       </div>
-      <button type="submit">Search</button>
+      <button class="buttons primary-button" type="submit">Search</button>
     </form>
     <br>
     <% animes.forEach(anime => { %>
+        <h4><%= anime.title %></h4>
         <a href="/animes/<%= anime.id %>">
             <img height="150" width="100" src="<%= anime.posterImagePath %>" >
         </a>

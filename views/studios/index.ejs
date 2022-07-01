@@ -4,21 +4,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/style.css">
     <title>Studios</title>
 </head>
 <body>
-    <h1>Search Studios</h1>
+    <div class="container">
+        <%- include('../partials/header.ejs')%>
+    </div>
+    <h1 class="header">Search Studios</h1>
     <form action="/studios" method="GET">
         <label>Name</label>
         <input type="text" name="name" value="<%= searchOptions.name%>">
-        <button type="submit">Search</button>
+        <button class="buttons primary-button" type="submit">Search</button>
     </form>
     <br>
     <% studios.forEach(studio => { %>
         <div><%= studio.name %></div>
-        <a href="/studios/<%= studio.id %>">View</a>
-        <a href="/studios/<%= studio.id %>/edit">Edit</a>
+    <div class="button-align">
+        <a class="buttons primary-button" href="/studios/<%= studio.id %>">View</a>
+        <a class="buttons primary-button" href="/studios/<%= studio.id %>/edit">Edit</a>
         <%- include('../partials/delete', { url: `/studios/${studio.id}`}) %>
       <% }) %>
+    </div>
 </body>
 </html>

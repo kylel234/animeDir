@@ -4,14 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/style.css">
     <title>NewStudios</title>
 </head>
 <body>
-    <h1>New Studios</h1>
+    <div class="container">
+        <%- include('../partials/header.ejs')%>
+    </div>
+    <h1 class="header">New Studios</h1>
     <form action="/studios" method="POST">
         <%- include('form_fields') %>
-        <a href="/studios">Cancel</a>
-        <button type="submit">Create</button>
+        <a class="buttons danger-button" href="/studios">Cancel</a>
+        <button class="buttons primary-button" type="submit">Create</button>
     </form>
 </body>
 </html>
