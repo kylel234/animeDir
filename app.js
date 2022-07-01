@@ -1,7 +1,6 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const path = require('path');
 const bodyParser = require('body-parser'); // body parser helps access input elements from server
 const methodOverride = require('method-override') // will help app to route to and use the put or delete method 
 
@@ -12,7 +11,7 @@ const animeRouter = require('./routes/animes');
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views'); // middleware to access views
 
-app.use(express.static(path.join(__dirname + '/public'))); // loads files in public
+app.use(express.static(__dirname + '/public')) // loads files in public
 app.use(bodyParser.urlencoded({limit: '10mb', extended: false})) 
 
 app.use(methodOverride('_method'))
