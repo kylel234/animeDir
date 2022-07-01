@@ -26,5 +26,9 @@
   "nodemonConfig": {
     "restartable": "rs",
     "delay": 2500
+  },
+  "engines": {
+    "node": "8.11.0",
+    "npm": "12.16.2"
   }
 }
