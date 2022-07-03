@@ -17,6 +17,7 @@
     <% if (animesByStudio.length > 0) { %>
         <h3><%= studio.name %> Anime</h3>
             <% animesByStudio.forEach(anime => { %>
+            <h4><%= anime.title %></h4>
             <a href="/animes/<%= anime.id %>">
                 <img height="150" width="100" src="<%= anime.posterImagePath %>" >
             </a>

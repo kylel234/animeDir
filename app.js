@@ -8,10 +8,10 @@ const indexRouter = require('./routes/index'); // gets route for index
 const studioRouter = require('./routes/studios');
 const animeRouter = require('./routes/animes');
 
+app.use(express.static(__dirname + '/public')); // loads files in public
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views'); // middleware to access views
 
-app.use(express.static(__dirname + '/public')); // loads files in public
 app.use(bodyParser.urlencoded({limit: '10mb', extended: false})) 
 
 app.use(methodOverride('_method'))
