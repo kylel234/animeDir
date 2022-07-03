@@ -1,0 +1,71 @@
+
+:root {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20 px;
+    color: rgb(199, 230, 255);
+}
+
+body {
+    background: rgb(25,84,198);
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    margin-bottom: 3rem;
+}
+
+.inner-container {
+    margin: 0 2rem;
+    display: flex;
+}
+
+.header {
+    font-size: 2rem;
+    font-weight: 500;
+    
+}
+
+.buttons {
+    border: 1px solid;
+    border-radius: .5rem;
+    padding: .2rem 0.5rem;
+    font-size: 1rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+}
+
+.primary-button {
+    color: blue;
+    background-color: rgb(199, 230, 255);
+}
+
+.primary-button:hover {
+    color: blue;
+    background-color: white;
+}
+
+.danger-button {
+    color: black;
+    background-color: rgb(227, 112, 76);
+}
+
+.danger-button:hover {
+    color: black;
+    background-color: white;
+}
+
+.button-align {
+    display: flex;
+    align-items: flex-start;
+}
+
+.button-align > * {
+    margin-left: 1rem;
+}
+
+.button-align > *:first-child {
+    margin-left: 0;
+}

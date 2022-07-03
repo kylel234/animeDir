@@ -1,0 +1,30 @@
+.header-title {
+    color: rgb(199, 230, 255);
+    text-decoration: none;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.header-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5rem;
+}
+
+.header-nav li {
+    list-style: none;
+}
+
+.header-nav li a {
+    text-decoration: none;
+    color: rgb(199, 230, 255);
+    font-weight: lighter;
+    padding: 1rem;
+}
+
+.header-nav li a:hover, .header-title:hover {
+    color: white;
+}
+
