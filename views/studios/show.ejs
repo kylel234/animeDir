@@ -12,8 +12,10 @@
         <%- include('../partials/header.ejs')%>
     </div>
     <h2><%= studio.name %></h2>
-    <a class="buttons primary-button" href="/studios/<%= studio.id %>/edit">Edit</a>
-    <%- include('../partials/delete', {url: `/studios/${studio.id}`}) %>
+    <div class="organize-buttons">
+        <a class="buttons primary-button" href="/studios/<%= studio.id %>/edit">Edit</a>
+        <%- include('../partials/delete', {url: `/studios/${studio.id}`}) %>
+    </div>
     <% if (animesByStudio.length > 0) { %>
         <h3><%= studio.name %> Anime</h3>
             <% animesByStudio.forEach(anime => { %>

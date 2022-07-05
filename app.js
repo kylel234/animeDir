@@ -14,7 +14,7 @@ app.set('views', __dirname + '/views'); // middleware to access views
 
 app.use(bodyParser.urlencoded({limit: '10mb', extended: false})) 
 
-app.use(methodOverride('_method'))
+app.use(methodOverride('_method')) // allows for methods like PUT and DELETE
 app.use('/', indexRouter);
 app.use('/studios', studioRouter);
 app.use('/animes', animeRouter);

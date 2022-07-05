@@ -17,8 +17,9 @@ body {
 }
 
 .inner-container {
-    margin: 0 2rem;
+    margin: 2rem;
     display: flex;
+    gap: 20px;
 }
 
 .header {
@@ -69,4 +70,25 @@ body {
 
 .button-align > *:first-child {
     margin-left: 0;
+}
+
+.studio-row {
+    display: block;
+    margin-bottom: 20px;
+}
+
+.organize-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.anime-title {
+    color: rgb(199, 230, 255);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.anime-title a:hover, .anime-title:hover{
+    color: white;
 }

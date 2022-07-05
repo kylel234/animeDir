@@ -27,11 +27,13 @@
       <button class="buttons primary-button" type="submit">Search</button>
     </form>
     <br>
-    <% animes.forEach(anime => { %>
-        <h4><%= anime.title %></h4>
-        <a href="/animes/<%= anime.id %>">
-            <img height="150" width="100" src="<%= anime.posterImagePath %>" >
-        </a>
-    <% }) %>
+    <div class="inner-container">
+        <% animes.forEach(anime => { %>
+            <a class="anime-title" href="/animes/<%= anime.id %>">
+                <h4><%= anime.title %></h4>
+                <img height="150" width="100" src="<%= anime.posterImagePath %>" >
+            </a>
+        <% }) %>
+    </div>
 </body>
 </html>

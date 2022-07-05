@@ -17,8 +17,8 @@
     <h2 class="header">Recently Added</h2>
     <div class="inner-container">
         <% animes.forEach(anime => { %>
-            <h4><%= anime.title %></h4>
-            <a href="/animes/<%= anime.id %>">
+            <a class="anime-title" href="/animes/<%= anime.id %>">
+                <h4><%= anime.title %></h4>
                 <img height="150" width="100" src="<%= anime.posterImagePath %>" >
             </a>
         <% }) %>
