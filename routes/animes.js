@@ -2,17 +2,17 @@ const express = require('express');
 const router = express.Router();
 const Anime = require('../models/anime');
 const Studio = require('../models/studio');
-const path = require('path');
-const fs = require('fs'); // file system, helps delete anime we dont need
-const uploadPath = path.join('public', Anime.posterImageBasePath); // gets the upload path written in models anime.js
-const multer = require('multer');
+//const path = require('path');
+//const fs = require('fs'); // file system, helps delete anime we dont need
+//const uploadPath = path.join('public', Anime.posterImageBasePath); // gets the upload path written in models anime.js
+//const multer = require('multer');
 const imgTypes = ['image/jpeg', 'image/png', 'image/gif'] // array of image types our app will support when uploading poster
-const upload = multer({ // multer helps upload files
+/*const upload = multer({ // multer helps upload files
   dest: uploadPath,
   fileFileter: (req, file, callback) => { // filters through files
     callback(null, imgTypes.includes(file.mimetype));
   }
-});
+});*/
 
 // all anime route
 router.get('/', async (req, res) => {
@@ -47,35 +47,35 @@ router.get('/new', async (req, res) => {
 });
 
 // Create route for anime
-router.post('/', upload.single('poster'), async (req, res) => {
-  const fileName = req.file != null ? req.file.filename : null; // checks if filename is found and stores in fileName
+router.post('/', async (req, res) => {
+  //const fileName = req.file != null ? req.file.filename : null; // checks if filename is found and stores in fileName
   const anime = new Anime({
     title: req.body.title,
     studio: req.body.studio,
     dateAired: new Date(req.body.dateAired),
     episodeCount: req.body.episodeCount,
-    animeImageName: fileName,
     description: req.body.description
   })
+  saveImg(anime, req.body.poster)
     
   try {
     const newAnime = await anime.save();
     res.redirect(`animes/${newAnime.id}`);
   } catch {
-    if (anime.animeImageName != null) {
+    /*if (anime.animeImageName != null) {
       removeAnimePoster(anime.animeImageName);
-    }
+    }*/
     renderNewPage(res, anime, true);
   }
 });
 
-function removeAnimePoster(filename) {
+/*function removeAnimePoster(filename) {
   fs.unlink(path.join(uploadPath, filename), err => {
     if (err) {
       console.log(err);
     }
   });
-}
+}*/
 
 // show page route
 router.get('/:id', async (req, res) => {
@@ -98,9 +98,8 @@ router.get('/:id/edit', async (req, res) => {
 });
 
 // update anime route
-router.put('/:id', upload.single('poster'), async (req, res) => {
+router.put('/:id', async (req, res) => {
   let anime
-
   try {
     anime = await Anime.findById(req.params.id)
     // allows user to edit features of anime
@@ -109,10 +108,15 @@ router.put('/:id', upload.single('poster'), async (req, res) => {
     anime.dateAired = new Date(req.body.dateAired)
     anime.episodeCount = req.body.episodeCount
     anime.description = req.body.description
+    // makes sure cover exists so as to not accidentally delete instead override it
+    if (req.body.poster != null && req.body.poster !== '') {
+      saveImg(anime, req.body.poster)
+    }
     await anime.save() // save this updated anime
-    res.redirect(`/animes/${anime.id}`);
-  } catch {
+    res.redirect(`/animes/${anime.id}`); // redirects to show page of the book
+  } catch(errorMessage) {
     if (anime != null) {
+      console.log(errorMessage)
       renderEditPage(res, anime, true) // renders edit page again with error message
     } else {
       res.redirect('/') // cant get anime, go to home page
@@ -138,6 +142,18 @@ router.delete('/:id', async (req, res) => {
     }
   }
 })
+
+// saves img of anime in db
+function saveImg(anime, posterEncoded) {
+  // check poster is not null and is valid
+  if (posterEncoded == null) return 
+  const poster = JSON.parse(posterEncoded)
+  // checks if poster is valid with valid img type 
+  if (poster != null && imgTypes.includes(poster.type)) {
+    anime.animeImage = new Buffer.from(poster.data, 'base64')
+    anime.imgType = poster.type
+  }
+}
 
 async function renderNewPage(res, anime, hasError = false) {
   renderFormPage(res, anime, 'new', hasError)

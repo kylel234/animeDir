@@ -12,7 +12,7 @@
     <%- include('../partials/header.ejs')%>
 </div>
     <h2 class="header">New Anime</h2>
-<form action="/animes" method="POST" enctype="multipart/form-data">
+<form action="/animes" method="POST">
   <%- include('_form_fields') %>
   <a class="buttons danger-button" href="/animes">Cancel</a>
   <button class="buttons primary-button" type="submit">Create</button>

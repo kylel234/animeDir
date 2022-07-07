@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-const path = require('path');
-const posterImageBasePath = 'uploads/animePoster'
+//const path = require('path');
+//const posterImageBasePath = 'uploads/animePoster'
 
-// defines structure of data store in mongodb for animes
+// defines structure of data stored in mongodb for animes
 const animeSchema = new mongoose.Schema({
     title: {
         type: String,
@@ -24,7 +24,11 @@ const animeSchema = new mongoose.Schema({
         required: true,
         default: Date.now
     },
-    animeImageName: {
+    animeImage: {
+        type: Buffer,
+        required: true
+    },
+    imgType: {
         type: String,
         required: true
     },
@@ -36,11 +40,13 @@ const animeSchema = new mongoose.Schema({
 });
 
 animeSchema.virtual('posterImagePath').get(function() {
-    // checks if there is a poster image and if so get the path to it
-    if (this.animeImageName != null) {
-        return path.join('/', posterImageBasePath, this.animeImageName)
+    // checks if there is a poster image and if so gets proper string for img src
+    if (this.animeImage != null && this.imgType != null) {
+        //return path.join('/', posterImageBasePath, this.animeImageName)
+        // returns proper string for anime img for img src
+        return `data:${this.imgType};charset=utf-8;base64,${this.animeImage.toString('base64')}`
     }
 })
 
 module.exports = mongoose.model('anime', animeSchema);
-module.exports.posterImageBasePath = posterImageBasePath;
+//module.exports.posterImageBasePath = posterImageBasePath;
