@@ -17,7 +17,7 @@ const imgTypes = ['image/jpeg', 'image/png', 'image/gif'] // array of image type
 // all anime route
 router.get('/', async (req, res) => {
   let query = Anime.find()
-  // search for books through search bar
+  // search for animes through search bar
   // checks for title
   if (req.query.title != null && req.query.title != '') {
     query = query.regex('title', new RegExp(req.query.title, 'i'))
